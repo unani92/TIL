@@ -22,12 +22,12 @@ T = int(sys.stdin.readline())
 stack = []
 for _ in range(T) : 
     d = int(sys.stdin.readline())
-    if d == 0 : 
+    if D == 0 : 
         # 스택이 비었는데 파핑하면 에러뜨니까 안전장치 설치 
         if len(stack) != 0 :     
             stack.pop()
     else : 
-        stack.append(d)
+        stack.append(D)
 ```
 
 ### 괄호
@@ -65,42 +65,3 @@ for _ in range(T):
 
 > 줄바꿈 시 input은 저절로 끊어주지만 readline은 줄바꿈 명령어가 추가되서 나온다. 따라서 strip()으로 벗겨주어 해결해야 한다.
 ![image](https://user-images.githubusercontent.com/53211781/74491209-4ee52d00-4f0e-11ea-9349-4da680b443f4.png)
-
-
-### swea_ 괄호검사 
-```python
-def vps(lst) :
-    stack = []
-    for i in lst :
-        if (len(stack) == 0)  and (i == ')' or i == '}') :
-            return 0
-
-        else :
-            if i == '{' or i =='(' :
-                stack.append(i)
-
-            else :
-                if i == '}' and stack[-1] == '{' :
-                    stack.pop()
-
-                elif i == ')' and stack[-1] == '(' :
-                    stack.pop()
-
-                else :
-                    return 0
-
-    else : 
-        if len(stack) == 0 : return 1
-        else : return 0
-
-T = int(input())
-for t in range(1, 1+T) :
-
-    lst = list(input())
-    lst = [i for i in lst if i in ('(',')','{','}')]
-
-    print('#{} {}'.format(t, vps(lst)))
-
-```
-
-- 
