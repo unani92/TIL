@@ -1,27 +1,34 @@
-def DFS(v) :
-    visited[v] = 1
-
-    print(v, end =' ')
-
-    for w in G[v] :
-        if not visited[w] :
-            DFS(w)
-
-
-
-import sys
-sys.stdin = open('input.txt')
-
-# 그래프를 만들어주는 기본 틀
+# import sys
+# sys.stdin = open('sample_input.txt')
 
 V, E = map(int, input().split())
+G = [[] for _ in range(V)]
 
-G = [[] for _ in range(V + 1)]
-visited = [0 for _ in range(V + 1)]
-
-for i in range(E):
+for _ in range(E) :
     u, v = map(int, input().split())
-    G[u].append(v)
-    G[v].append(u)
+    G[u-1].append(v)
+    G[v-1].append(u)
 
-print(DFS(1))
+visited = [False] * V
+cnt = 0
+while False in visited :
+
+    v = visited.index(0) + 1
+    visited[v-1] = True
+    stack = [v]
+
+    while stack :
+        p = v
+        for w in G[v-1] :
+            if not visited[w-1] :
+                stack.append(w)
+                visited[w-1] = True
+                v = w
+                break
+        else :
+            if p == v :
+                v = stack.pop()
+
+    cnt += 1
+
+print(cnt)
